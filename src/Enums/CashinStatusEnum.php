@@ -9,7 +9,7 @@ namespace BrokeYourBike\IntouchGroup\Enums;
 /**
  * @author Ivan Stasiuk <ivan@stasi.uk>
  */
-enum CashoutStatusEnum: string
+enum CashinStatusEnum: string
 {
     // This status designates a successful and closed transaction at Touch level.
     case SUCCESSFUL = 'SUCCESSFUL';
@@ -23,4 +23,7 @@ enum CashoutStatusEnum: string
 
     // Once a transaction is closed after a failure or success, its status changes to "Finished".
     case FINISHED = 'FINISHED';
+
+    // No operation/transaction found.
+    case NOTFOUND = 'NOTFOUND';
 }

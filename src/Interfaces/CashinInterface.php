@@ -6,16 +6,16 @@
 
 namespace BrokeYourBike\IntouchGroup\Interfaces;
 
-use BrokeYourBike\IntouchGroup\Enums\ChannelEnum;
+use BrokeYourBike\IntouchGroup\Enums\ServiceEnum;
 
 /**
  * @author Ivan Stasiuk <ivan@stasi.uk>
  */
-interface CashoutInterface
+interface CashinInterface
 {
-    public function getServiceId(): string;
+    public function getServiceId(): ServiceEnum;
     public function getPartnerTransactionId(): string;
     public function getRecipientPhone(): string;
     public function getAmount(): float;
-    public function getCallbackURL(): float;
+    public function getCallbackURL(): string;
 }

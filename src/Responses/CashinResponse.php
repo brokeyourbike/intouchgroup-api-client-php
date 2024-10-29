@@ -11,9 +11,10 @@ use BrokeYourBike\DataTransferObject\JsonResponse;
 /**
  * @author Ivan Stasiuk <ivan@stasi.uk>
  */
-class CashoutResponse extends JsonResponse
+class CashinResponse extends JsonResponse
 {
     public ?string $status;
+    public ?string $description;
     public ?string $service_id;
     public ?string $partner_transaction_id;
     public ?string $gu_transaction_id;

@@ -8,9 +8,9 @@ namespace BrokeYourBike\IntouchGroup;
 
 use GuzzleHttp\ClientInterface;
 use BrokeYourBike\ResolveUri\ResolveUriTrait;
-use BrokeYourBike\IntouchGroup\Responses\CashoutResponse;
+use BrokeYourBike\IntouchGroup\Responses\CashinResponse;
 use BrokeYourBike\IntouchGroup\Interfaces\ConfigInterface;
-use BrokeYourBike\IntouchGroup\Interfaces\CashoutInterface;
+use BrokeYourBike\IntouchGroup\Interfaces\CashinInterface;
 use BrokeYourBike\HttpEnums\HttpMethodEnum;
 use BrokeYourBike\HttpClient\HttpClientTrait;
 use BrokeYourBike\HttpClient\HttpClientInterface;
@@ -38,20 +38,20 @@ class Client implements HttpClientInterface
         return $this->config;
     }
 
-    public function cashout(CashoutInterface $transaction): CashoutResponse
+    public function cashin(CashinInterface $transaction): CashinResponse
     {
         $options = [
             \GuzzleHttp\RequestOptions::HEADERS => [
                 'Accept' => 'application/json',
             ],
             \GuzzleHttp\RequestOptions::AUTH => [
-                $this->config->getUsername(),
-                $this->config->getPassword(),
+                $this->config->getAuthUsername(),
+                $this->config->getAuthPassword(),
             ],
             \GuzzleHttp\RequestOptions::JSON => [
-                'login_api' => $this->config->getUsername(),
-                'password_api' => $this->config->getPassword(),
-                'service_id' => $transaction->getServiceId(),
+                'login_api' => $this->config->getApiUsername(),
+                'password_api' => $this->config->getApiPassword(),
+                'service_id' => $transaction->getServiceId()->value,
                 'partner_id' => $this->config->getPartnerId(),
                 'partner_transaction_id' => $transaction->getPartnerTransactionId(),
                 'amount' => $transaction->getAmount(),
@@ -62,10 +62,37 @@ class Client implements HttpClientInterface
 
         $response = $this->httpClient->request(
             HttpMethodEnum::POST->value,
-            (string) $this->resolveUriFor(rtrim($this->config->getUrl(), '/'), '/apidist/sec/agency_code/cashout_request'),
+            (string) $this->resolveUriFor(rtrim($this->config->getUrl(), '/'), "/apidist/sec/{$this->config->getAgentId()}/cashin"),
             $options
         );
 
-        return new CashoutResponse($response);
+        return new CashinResponse($response);
+    }
+
+    public function status(string $partnerTransactionId): CashinResponse
+    {
+        $options = [
+            \GuzzleHttp\RequestOptions::HEADERS => [
+                'Accept' => 'application/json',
+            ],
+            \GuzzleHttp\RequestOptions::AUTH => [
+                $this->config->getAuthUsername(),
+                $this->config->getAuthPassword(),
+            ],
+            \GuzzleHttp\RequestOptions::JSON => [
+                'login_api' => $this->config->getApiUsername(),
+                'password_api' => $this->config->getApiPassword(),
+                'partner_id' => $this->config->getPartnerId(),
+                'partner_transaction_id' => $partnerTransactionId,
+            ],
+        ];
+
+        $response = $this->httpClient->request(
+            HttpMethodEnum::POST->value,
+            (string) $this->resolveUriFor(rtrim($this->config->getUrl(), '/'), "/apidist/sec/{$this->config->getAgentId()}/check_status"),
+            $options
+        );
+
+        return new CashinResponse($response);
     }
 }

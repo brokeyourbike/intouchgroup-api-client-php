@@ -12,7 +12,10 @@ namespace BrokeYourBike\IntouchGroup\Interfaces;
 interface ConfigInterface
 {
     public function getUrl(): string;
-    public function getUsername(): string;
-    public function getPassword(): string;
+    public function getAuthUsername(): string;
+    public function getAuthPassword(): string;
+    public function getApiUsername(): string;
+    public function getApiPassword(): string;
+    public function getAgentId(): string;
     public function getPartnerId(): string;
 }

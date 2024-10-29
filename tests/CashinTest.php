@@ -7,24 +7,24 @@
 namespace BrokeYourBike\IntouchGroup\Tests;
 
 use Psr\Http\Message\ResponseInterface;
-use BrokeYourBike\IntouchGroup\Responses\CashoutResponse;
+use BrokeYourBike\IntouchGroup\Responses\CashinResponse;
 use BrokeYourBike\IntouchGroup\Interfaces\ConfigInterface;
-use BrokeYourBike\IntouchGroup\Interfaces\CashoutInterface;
-use BrokeYourBike\IntouchGroup\Enums\CashoutStatusEnum;
+use BrokeYourBike\IntouchGroup\Interfaces\CashinInterface;
+use BrokeYourBike\IntouchGroup\Enums\CashinStatusEnum;
 use BrokeYourBike\IntouchGroup\Client;
 
 /**
  * @author Ivan Stasiuk <ivan@stasi.uk>
  */
-class CashoutTest extends TestCase
+class CashinTest extends TestCase
 {
     /** @test */
     public function it_can_prepare_request(): void
     {
-        $transaction = $this->getMockBuilder(CashoutInterface::class)->getMock();
+        $transaction = $this->getMockBuilder(CashinInterface::class)->getMock();
 
-        /** @var CashoutInterface $transaction */
-        $this->assertInstanceOf(CashoutInterface::class, $transaction);
+        /** @var CashinInterface $transaction */
+        $this->assertInstanceOf(CashinInterface::class, $transaction);
 
         $mockedConfig = $this->getMockBuilder(ConfigInterface::class)->getMock();
         $mockedConfig->method('getUrl')->willReturn('https://api.example/');
@@ -52,8 +52,8 @@ class CashoutTest extends TestCase
          * */
         $api = new Client($mockedConfig, $mockedClient);
 
-        $requestResult = $api->cashout($transaction);
-        $this->assertInstanceOf(CashoutResponse::class, $requestResult);
-        $this->assertEquals(CashoutStatusEnum::PENDING->value, $requestResult->status);
+        $requestResult = $api->Cashin($transaction);
+        $this->assertInstanceOf(CashinResponse::class, $requestResult);
+        $this->assertEquals(CashinStatusEnum::PENDING->value, $requestResult->status);
     }
 }
