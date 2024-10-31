@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/compare/v0.3.0...v0.3.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* import and lock ([d8c04ca](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/commit/d8c04cad0f2fc98f500cece18b69829adf646501))
+
 ## [0.3.0](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/compare/v0.2.0...v0.3.0) (2024-10-31)
 
 
