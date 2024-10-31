@@ -60,6 +60,10 @@ class Client implements HttpClientInterface
             ],
         ];
 
+        if ($transaction instanceof SourceModelInterface){
+            $options[\BrokeYourBike\HasSourceModel\Enums\RequestOptions::SOURCE_MODEL] = $transaction;
+        }
+
         $response = $this->httpClient->request(
             HttpMethodEnum::POST->value,
             (string) $this->resolveUriFor(rtrim($this->config->getUrl(), '/'), "/apidist/sec/{$this->config->getAgentId()}/cashin"),
