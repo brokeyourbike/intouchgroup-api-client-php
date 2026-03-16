@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/compare/v0.3.1...v0.4.0) (2026-03-16)
+
+
+### Features
+
+* source ([e9008df](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/commit/e9008df2034f4046e09d60e3a504ce5d6f8ee433))
+
 ### [0.3.1](https://www.github.com/brokeyourbike/intouchgroup-api-client-php/compare/v0.3.0...v0.3.1) (2024-10-31)
 
 
